@@ -1,5 +1,7 @@
 import shortner as sh
 import streamlit as st
+import chromedriver_autoinstaller
+chromedriver_autoinstaller.install()
 st.title('URL Un-Shortener')
 url = st.text_input("Enter URL: ")
 if not url:
