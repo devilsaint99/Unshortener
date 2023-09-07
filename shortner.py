@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-import chromedriver_autoinstaller
 
 class UrlCheck():
     def __init__(self,url):
@@ -42,7 +41,6 @@ class UrlCheck():
             
 
     def drive(self,site):
-        chromedriver_autoinstaller.install()
         driver = webdriver.Chrome()
         driver.accept_untrusted_certs = True
         driver.get(self.url+'+')
