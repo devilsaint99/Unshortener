@@ -11,6 +11,6 @@ else:
         st.write(f'Original URL: {shortIt.data}')
     except Exception as e:
         st.error("Opps.. an error occurred.\nIt is either due to\n1. Our site couldn't handle link.\n2. Link might be broken.")
-        st.sidebar.write("\n\nIf you feel our site could't handle the link please help to log an issue on [issue](<link_of_issue>) in our github.")
+        st.sidebar.write("\n\nIf you feel our site could't handle the link please help to log an issue on [issue](https://github.com/devilsaint99/Unshortener/issues) in our github.")
 
 
