@@ -2,8 +2,8 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 class UrlCheck():
     def __init__(self,url):
         self.url = url
@@ -41,7 +41,13 @@ class UrlCheck():
             
 
     def drive(self,site):
-        driver = webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+
+        driver = webdriver.Chrome(options=chrome_options)
         driver.accept_untrusted_certs = True
         driver.get(self.url+'+')
         wait = WebDriverWait(driver, 10)
