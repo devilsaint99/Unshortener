@@ -21,7 +21,10 @@ class UrlCheck():
     def tinyurl(self,wait):
         content= wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.text-3xl.font-weight-bold.text-blue.ml-2.break-all')))
         self.data = content[1].text
-        
+
+    def shorturl_at(self,wait):
+        content = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.squareboxbig')))
+        self.data = content.text        
             
     def siteCheck(self):
         if self.url.count('//rb.gy'):
@@ -34,6 +37,10 @@ class UrlCheck():
             
         elif self.url.count('//tinyurl'):
             site = 'tiny'
+            self.drive(site)
+
+        elif self.url.count('//shorturl.at'):
+            site = 'shorturl.at'
             self.drive(site)
             
         else:
@@ -49,14 +56,28 @@ class UrlCheck():
 
         driver = webdriver.Chrome(options=chrome_options)
         driver.accept_untrusted_certs = True
-        driver.get(self.url+'+')
-        wait = WebDriverWait(driver, 10)
+        
+        
         if site == 're':
+            driver.get(self.url+'+')
+            wait = WebDriverWait(driver, 10)
             self.rebrandly(wait)
+
         elif site == 'bit':
+            driver.get(self.url+'+')
+            wait = WebDriverWait(driver, 10)
             self.bitly(wait)
+
         elif site == 'tiny':
+            driver.get(self.url+'+')
+            wait = WebDriverWait(driver, 10)
             self.tinyurl(wait)
+        
+        elif site == 'shorturl.at':
+            driver.get('https://www.shorturl.at/long-url.php?u='+self.url)
+            wait = WebDriverWait(driver, 10)
+            self.shorturl_at(wait)
+        
         driver.quit()
     
     def hyper(self):
