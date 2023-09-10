@@ -24,7 +24,11 @@ class UrlCheck():
 
     def shorturl_at(self,wait):
         content = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.squareboxbig')))
-        self.data = content.text        
+        self.data = content.text
+
+    def surl_li(self,wait):
+        content = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.long-url')))
+        self.data = content.text[4:]        
             
     def siteCheck(self):
         if self.url.count('//rb.gy'):
@@ -41,6 +45,10 @@ class UrlCheck():
 
         elif self.url.count('//shorturl.at'):
             site = 'shorturl.at'
+            self.drive(site)
+
+        elif self.url.count('//surl.li'):
+            site = 'surl.li'
             self.drive(site)
             
         else:
@@ -77,6 +85,11 @@ class UrlCheck():
             driver.get('https://www.shorturl.at/long-url.php?u='+self.url)
             wait = WebDriverWait(driver, 10)
             self.shorturl_at(wait)
+        
+        elif site == 'surl.li':
+            driver.get(self.url + '+')
+            wait = WebDriverWait(driver,10)
+            self.surl_li(wait)
         
         driver.quit()
     
